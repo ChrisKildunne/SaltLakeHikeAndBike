@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import * as trailsAPI from '../../utilities/trails-api';
+import TrailDetailsPage from '../../pages/TrailDetailsPage/TrailDetailsPage';
 
-export default function NewTrail({initialState}){
+export default function NewTrail({initialState, trailItem}){
+  const [showForm, setShowForm] = useState(false)
   const [message, setMessage] = useState('');
   const [trail, setTrail] = useState(initialState);
 
@@ -18,15 +20,20 @@ export default function NewTrail({initialState}){
     try {
         const newTrail = await trailsAPI.addNew(trail);
         setMessage('Success');
-        setTrail(initialState);  
-    } catch (error) {
+        setTrail(initialState);
+        } catch (error) {
         setMessage('Error creating trail.');
     }
 }
-
+    const handleShow = () => {
+        setShowForm(true)
+    }
 
     return(
         <>
+        {!showForm ? ( 
+        <button onClick={handleShow}>Add a new trail</button>
+        ) : (
         <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -70,7 +77,7 @@ export default function NewTrail({initialState}){
         </div>
         <button type="submit">Create Trail</button>
       </form>
-      {message && <p>{message}</p>}
+      )}
       </>
     )
 }

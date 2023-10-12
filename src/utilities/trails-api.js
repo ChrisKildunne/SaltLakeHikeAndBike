@@ -10,6 +10,7 @@ export async function getAll(){
 }
 
 export async function getTrailById(id) {
+    console.log(id)
     return sendRequest(`${BASE_URL}/${id}`); 
   }
   
