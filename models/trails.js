@@ -8,20 +8,11 @@ const bikeSchema = new Schema({
       enum: ['Easy', 'Moderate', 'Hard']
     },
     mileage: Number,
-    rating: {
-      type: Number,
-      enum:[1 , 2 , 3 , 4 , 5]
-    },
     trailStyle: {
       type: String,
       enum: ['Tech', 'Flow', 'Jump']
     },
-    description: String,
-     photos: [{ 
-      type: Schema.Types.ObjectId,
-      ref: 'Photo',
-        }],
-    review:[reviewSchema]
+    description: String
   }, {
       timestamps: true
   });

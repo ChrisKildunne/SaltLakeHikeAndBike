@@ -1,4 +1,4 @@
-const Trail = require('../models/trails')
+const Trail =  require('../../models/trails')
 
 async function create(req,res){
     try{
