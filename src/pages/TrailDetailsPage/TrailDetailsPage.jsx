@@ -1,6 +1,7 @@
 import { useEffect , useState} from 'react'
 import * as trailsAPI from '../../utilities/trails-api'
 import { useParams } from 'react-router-dom'
+import ReviewForm from '../../components/ReviewForm/ReviewForm'
 
 export default function TrailDetailsPage(){
     const { trailId } = useParams()
@@ -20,6 +21,7 @@ export default function TrailDetailsPage(){
        <p>{trailDetails.mileage}</p>
        <p>{trailDetails.trailStyle}</p>
        <p>{trailDetails.difficulty}</p>
+       <ReviewForm  />
    </>
     )
 }
