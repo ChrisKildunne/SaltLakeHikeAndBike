@@ -1,5 +1,5 @@
 import * as reviewsAPI from '../../utilities/reviews-api';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ReviewForm({ trailId }) {
     const [reviews, setReviews] = useState([]);
@@ -18,6 +18,13 @@ export default function ReviewForm({ trailId }) {
         setReviewText("");
         setRating(0);
     }
+    useEffect(() => {
+        async function getReviews(){
+            const reviewData = await reviewsAPI.getAll(trailId)
+            setReviews(reviewData)
+        }
+        getReviews()
+    },[])
 
     const handleAddReview = (evt) => {
         evt.preventDefault();
@@ -49,6 +56,15 @@ export default function ReviewForm({ trailId }) {
                 </select>
                 <button type="submit">Add Review</button>
             </form>
+            <div>
+                {reviews.map((review,idx)=>(
+                    <div key={idx}>
+                        <p>{review.user.name}</p>
+                        <p>{review.text}</p>
+                        <p>{review.rating}</p>
+                        </div>
+                ))}
+            </div>
         </>
     )
 }

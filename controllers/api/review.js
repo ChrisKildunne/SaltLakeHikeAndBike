@@ -19,7 +19,12 @@ async function create(req,res){
         res.status(400).json(err)
     }
 }
-
+async function getAll(req,res){
+    const trailId = req.params.trailId
+    const reviews = await Review.find({trail: trailId}).populate('user').exec();
+    res.json(reviews)
+}
 module.exports = {
-    create
+    create,
+    getAll
 }
