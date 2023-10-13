@@ -14,14 +14,22 @@ export default function TrailDetailsPage(){
         getTrailDetails()
     }, [trailId])
 
+
     return(
    <>
-        <h1>{trailDetails.name} Details</h1>
-       <p>{trailDetails.description}</p>
-       <p>{trailDetails.mileage}</p>
-       <p>{trailDetails.trailStyle}</p>
-       <p>{trailDetails.difficulty}</p>
-       <ReviewForm  />
+   {trailDetails === null ? (
+                <p>null</p>
+            ) : (
+        <>
+            <h1>{trailDetails.name} Details</h1>
+        <p>{trailDetails.description}</p>
+        <p>{trailDetails.mileage}</p>
+        <p>{trailDetails.trailStyle}</p>
+        <p>{trailDetails.difficulty}</p>
+        <p>{trailDetails._id}</p>
+        <ReviewForm  trailId={trailId}/>
+        </>
+        )}
    </>
     )
 }

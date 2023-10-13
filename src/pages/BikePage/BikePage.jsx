@@ -27,7 +27,7 @@ export default function BikePage() {
       <ul>
   {trailItems.map(trailItem => (
     <li key={trailItem._id}>
-      <Link to={`/bike/${trailItem._id}`} className="card-link">
+      <Link to={`/trail/${trailItem._id}`} className="card-link">
       <h2>{trailItem.name}</h2>
       <p>Difficulty: {trailItem.difficulty}</p>
       <p>Mileage: {trailItem.mileage}</p>

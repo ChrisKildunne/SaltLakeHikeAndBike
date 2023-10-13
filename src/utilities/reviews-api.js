@@ -1,4 +1,7 @@
-export async function addNew(trailId,reviewText, rating, reviewId){
-    const payload = {text : reviewText, rating: rating, reviewId: reviewId }
-    return sendRequest(`${BASE_URL}/${trailId}`, 'POST', payload)
+import sendRequest from './send-request';
+const BASE_URL = '/api/reviews';
+
+export async function addNew(trailId,reviewData){
+    console.log(trailId, reviewData)
+    return sendRequest(`${BASE_URL}/${trailId}`, 'POST', reviewData)
 }

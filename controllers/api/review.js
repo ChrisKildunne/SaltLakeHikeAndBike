@@ -1,5 +1,4 @@
 const Review = require('../../models/review')
-const Trail = require('../../models/trail')
 
 
 async function create(req,res){
@@ -11,7 +10,9 @@ async function create(req,res){
             rating,
             trail: req.params.trailId
         })
-        const reviews = await Reviews.find({trail: req.params.trailId}).populate('user').exec();
+        const reviews = await Review.find({trail: req.params.trailId}).populate('user').exec();
+        console.log(reviews)
+        console.log('wevrnjuewce')
         res.json(reviews)
     }catch(err){
         console.error(err)

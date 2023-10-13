@@ -18,8 +18,8 @@ export default function App() {
       <NavBar user={ user } setUser={ setUser }/>
       <Routes>
           <Route path='/hike' element={ <HikePage /> } />
-          <Route path='/bike' element={ <BikePage /> } />
-          <Route path='/bike/:trailId' element={ <TrailDetailsPage /> } />
+          <Route path='/trail' element={ <BikePage /> } />
+          <Route path='/trail/:trailId' element={ <TrailDetailsPage /> } />
       </Routes>
       </>
     :
