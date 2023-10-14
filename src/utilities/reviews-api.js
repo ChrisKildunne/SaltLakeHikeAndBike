@@ -8,3 +8,7 @@ export async function addNew(trailId,reviewData){
 export async function getAll(trailId){
     return sendRequest(`${BASE_URL}/${trailId}`)
 }
+export async function deleteReview(reviewId, trailId){
+    console.log(trailId, reviewId);
+    return sendRequest(`${BASE_URL}/${trailId}/${reviewId}`, 'DELETE');
+}

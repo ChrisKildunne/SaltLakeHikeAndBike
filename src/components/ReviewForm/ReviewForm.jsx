@@ -30,7 +30,11 @@ export default function ReviewForm({ trailId }) {
         evt.preventDefault();
         addReview();
     }
-
+    const deleteReview = async (idx, reviewId, trailId) => {
+       await reviewsAPI.deleteReview(reviewId, trailId)
+       reviews.splice(idx,1)
+       setReviews([...reviews])
+    }
     return (
         <>
             <h3>Add a review:</h3>
@@ -59,10 +63,12 @@ export default function ReviewForm({ trailId }) {
             <div>
                 {reviews.map((review,idx)=>(
                     <div key={idx}>
+                        <p>{review._id}</p>
                         <p>{review.user.name}</p>
                         <p>{review.text}</p>
                         <p>{review.rating}</p>
-                        </div>
+                        <button onClick={() => deleteReview(idx, review._id, trailId)}>Delete Review</button>
+                    </div>
                 ))}
             </div>
         </>
