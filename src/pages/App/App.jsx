@@ -19,7 +19,7 @@ export default function App() {
       <Routes>
           <Route path='/hike' element={ <HikePage /> } />
           <Route path='/trail' element={ <BikePage /> } />
-          <Route path='/trail/:trailId' element={ <TrailDetailsPage /> } />
+          <Route path='/trail/:trailId' element={ <TrailDetailsPage user={user} /> } />
       </Routes>
       </>
     :

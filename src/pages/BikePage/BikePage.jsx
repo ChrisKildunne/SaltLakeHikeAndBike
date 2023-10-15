@@ -24,6 +24,7 @@ export default function BikePage() {
   return (
     <>
       <h1>Biking Trails</h1>
+        <NewTrail  initialState={initialState} />
       <ul>
   {trailItems.map(trailItem => (
     <li key={trailItem._id}>
@@ -33,7 +34,6 @@ export default function BikePage() {
       <p>Mileage: {trailItem.mileage}</p>
       <p>Style: {trailItem.trailStyle}</p>
       </Link>
-      <NewTrail  initialState={initialState} />
     </li>
   ))}
 </ul>

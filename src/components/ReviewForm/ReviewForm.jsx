@@ -1,10 +1,14 @@
 import * as reviewsAPI from '../../utilities/reviews-api';
 import React, { useEffect, useState } from "react";
 
-export default function ReviewForm({ trailId }) {
+export default function ReviewForm({ trailId, user }) {
     const [reviews, setReviews] = useState([]);
     const [reviewText, setReviewText] = useState("");
     const [rating, setRating] = useState(0);
+    const [editIndex, setEditIndex] = useState(false)
+    const [showEdit, setShowEdit] =useState(false)
+
+
 
     const addReview = async () => {
         const reviewData = {
@@ -13,8 +17,7 @@ export default function ReviewForm({ trailId }) {
         };
 
         const newReview = await reviewsAPI.addNew(trailId, reviewData);
-
-        setReviews([...reviews, newReview]);
+        setReviews(newReview);
         setReviewText("");
         setRating(0);
     }
@@ -22,6 +25,8 @@ export default function ReviewForm({ trailId }) {
         async function getReviews(){
             const reviewData = await reviewsAPI.getAll(trailId)
             setReviews(reviewData)
+            console.log(reviews,'these are the reviews')
+           
         }
         getReviews()
     },[])
@@ -35,8 +40,24 @@ export default function ReviewForm({ trailId }) {
        reviews.splice(idx,1)
        setReviews([...reviews])
     }
+    const editReview = (idx) => {
+        setReviewText(reviews[idx].text);
+        setRating(reviews[idx].rating);
+        setEditIndex(idx);
+        setShowEdit(true)
+    }
+    const saveReview = async() => {
+        const reviewId = reviews[editIndex]._id
+        const updatedReviews = await reviewsAPI.editReview(trailId, reviewId, reviewText, rating)  
+        const updatedReviewsArray = [...reviews];
+        updatedReviewsArray[editIndex] = updatedReviews
+        setReviews(updatedReviews)  
+    }
+
     return (
         <>
+        {user && (
+            <>
             <h3>Add a review:</h3>
             <form onSubmit={handleAddReview}>
                 <input
@@ -58,16 +79,24 @@ export default function ReviewForm({ trailId }) {
                     <option value={4}>4</option>
                     <option value={5}>5</option>
                 </select>
-                <button type="submit">Add Review</button>
+                <>
+                </>
+                { !showEdit ? 
+            <button type="submit">Add Review</button>
+           :
+           <button type="submit" onClick = {saveReview}>Edit</button>
+                }
             </form>
+            </>
+        )}
             <div>
                 {reviews.map((review,idx)=>(
                     <div key={idx}>
-                        <p>{review._id}</p>
-                        <p>{review.user.name}</p>
                         <p>{review.text}</p>
                         <p>{review.rating}</p>
+                        <p>{review.user && review.user.name}</p>
                         <button onClick={() => deleteReview(idx, review._id, trailId)}>Delete Review</button>
+                        <button onClick={() => editReview(idx)}> Edit Review</button>
                     </div>
                 ))}
             </div>

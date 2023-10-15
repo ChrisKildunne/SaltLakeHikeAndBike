@@ -3,7 +3,7 @@ import * as trailsAPI from '../../utilities/trails-api'
 import { useParams } from 'react-router-dom'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 
-export default function TrailDetailsPage(){
+export default function TrailDetailsPage({user}){
     const { trailId } = useParams()
     const [trailDetails, setTrailDetails] =useState(null)
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function TrailDetailsPage(){
         <p>{trailDetails.trailStyle}</p>
         <p>{trailDetails.difficulty}</p>
         <p>{trailDetails._id}</p>
-        <ReviewForm  trailId={trailId}/>
+        <ReviewForm  trailId={trailId} user={user}/>
         </>
         )}
    </>
