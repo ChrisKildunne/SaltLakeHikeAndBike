@@ -37,20 +37,24 @@ async function deleteReview(req,res){
         console.log(err)
     }
 }
+const update = async (id, updateObj) => {
+    const options = {
+      new: true,
+    };
+    return Review.findOneAndUpdate({ _id: id }, { $set: updateObj }, options)
+      .populate('user')
+      .exec();
+  };
+  
+  
 async function editReview(req,res){
     try{
         const trailId = req.params.trailId
         const reviewId = req.params.reviewId
-        const { text, rating } = req.body;
-        const existingReview= await Review.findOneAndUpdate(
-        {_id: reviewId, trail: trailId},
-        {text,rating}).populate('user').exec();
-        existingReview.text = text
-        existingReview.rating = rating
-        console.log(existingReview.text,'this')
-        // const reviews = await Review.find({ trail: trailId }).populate('user').exec();
-        // console.log(reviews.text,'existingreview')
-        // res.json(existingReview)
+        const {text, rating} = req.body
+        const existingReview = await update(reviewId, { text, rating });
+        const reviews = await Review.find({ trail: trailId }).populate('user').exec();
+        res.json(existingReview)
     }  catch(err){
         console.error(err)
     }

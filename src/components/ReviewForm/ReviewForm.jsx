@@ -44,14 +44,19 @@ export default function ReviewForm({ trailId, user }) {
         setReviewText(reviews[idx].text);
         setRating(reviews[idx].rating);
         setEditIndex(idx);
+       
         setShowEdit(true)
     }
-    const saveReview = async() => {
+    const saveReview = async () => {
         const reviewId = reviews[editIndex]._id
         const updatedReviews = await reviewsAPI.editReview(trailId, reviewId, reviewText, rating)  
         const updatedReviewsArray = [...reviews];
         updatedReviewsArray[editIndex] = updatedReviews
-        setReviews(updatedReviews)  
+        setShowEdit(false);
+        setReviews(updatedReviewsArray) 
+        setEditIndex(null)
+        console.log('updated',updatedReviewsArray)
+        console.log(editIndex,'editINde')
     }
 
     return (
@@ -84,7 +89,7 @@ export default function ReviewForm({ trailId, user }) {
                 { !showEdit ? 
             <button type="submit">Add Review</button>
            :
-           <button type="submit" onClick = {saveReview}>Edit</button>
+           <button type = "button" onClick = {saveReview}>Edit</button>
                 }
             </form>
             </>

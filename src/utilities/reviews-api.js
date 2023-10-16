@@ -15,5 +15,6 @@ export async function deleteReview(reviewId, trailId){
 
 export async function editReview(trailId, reviewId, text, rating){
     const payload = {text, rating}
+    console.log('edit review', payload)
     return sendRequest(`${BASE_URL}/${trailId}/${reviewId}`, 'PUT', payload)
   }
