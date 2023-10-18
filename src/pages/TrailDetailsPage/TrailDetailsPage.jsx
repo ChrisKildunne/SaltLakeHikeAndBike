@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 
 export default function TrailDetailsPage({user}){
-    const { trailId } = useParams()
+    const { trailId, source } = useParams()
     const [trailDetails, setTrailDetails] =useState(null)
     useEffect(() => {
         async function getTrailDetails(){
@@ -15,21 +15,27 @@ export default function TrailDetailsPage({user}){
     }, [trailId])
 
 
-    return(
-   <>
-   {trailDetails === null ? (
-                <p>null</p>
-            ) : (
+    return (
         <>
-            <h1>{trailDetails.name} Details</h1>
-        <p>{trailDetails.description}</p>
-        <p>{trailDetails.mileage}</p>
-        <p>{trailDetails.trailStyle}</p>
-        <p>{trailDetails.difficulty}</p>
-        <p>{trailDetails._id}</p>
-        <ReviewForm  trailId={trailId} user={user}/>
+          {trailDetails === null ? (
+            <p>null</p>
+          ) : (
+            <>
+              <h1>{trailDetails.name} Details</h1>
+              <p>{trailDetails.description}</p>
+              <p>{trailDetails.mileage}</p>
+              <p>{trailDetails.trailStyle}</p>
+              <p>{trailDetails.difficulty}</p>
+              <p>{trailDetails._id}</p>
+    
+              {source === 'nearby' && (
+                // Display content specific to the nearby trails page
+                <p>This is from the nearby trails page</p>
+              )}
+    
+              <ReviewForm trailId={trailId} user={user} />
+            </>
+          )}
         </>
-        )}
-   </>
-    )
-}
+      );
+    }
