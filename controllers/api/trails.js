@@ -1,5 +1,8 @@
 const Trail =  require('../../models/trails')
 
+
+
+
 async function create(req, res) {
     try {
         const { name, difficulty, mileage, trailStyle, description } = req.body;
@@ -32,5 +35,5 @@ async function show(req,res){
 module.exports = {
     create,
     show,
-    index
+    index,
 }
