@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'; 
-import TrailDetailsPage from '../../pages/TrailDetailsPage/TrailDetailsPage';
+import NearbyTrailDetails from '../../pages/NearbyTrailDetails/NearbyTrailDetails';
 
 export default function NearbyTrailsPage() {
   const [nearbyTrails, setNearbyTrails] = useState([]);
@@ -35,9 +35,9 @@ export default function NearbyTrailsPage() {
       console.error(error);
     } 
   };
-<TrailDetailsPage nearbyTrails={nearbyTrails} />
   return (
     <div>
+<NearbyTrailDetails nearbyTrails={nearbyTrails} />
       <h2>Nearby Trails</h2>
       <button onClick={fetchNearbyTrails} >
         search
@@ -45,7 +45,7 @@ export default function NearbyTrailsPage() {
             <ul>
         {nearbyTrails.map(trail => (
           <li key={trail.id}>
-            <Link to={`/trail/${trail.id}`} className="card-link">
+            <Link to={`/nearby/${trail.id}`} className="card-link">
             <h1>{trail.id},</h1>
               <h2>{trail.name}</h2>
           

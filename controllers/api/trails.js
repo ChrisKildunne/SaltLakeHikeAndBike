@@ -1,5 +1,5 @@
 const Trail =  require('../../models/trails')
-const ApiTrail = require('../../models/apiTrail.js'); 
+// const ApiTrail = require('../../models/apiTrail.js'); 
 
 
 
@@ -31,6 +31,7 @@ async function addAPITrail(req,res){
 
 async function index(req, res){
     const trails = await Trail.find({}).sort('name').exec();
+    console.log(req)
     res.json(trails)
 }
 

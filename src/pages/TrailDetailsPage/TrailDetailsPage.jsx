@@ -10,6 +10,7 @@ export default function TrailDetailsPage({user}){
         async function getTrailDetails(){
             const trail = await trailsAPI.getTrailById(trailId)
             setTrailDetails(trail)
+            console.log(trailDetails)
         }
         getTrailDetails()
     }, [trailId])
@@ -17,9 +18,6 @@ export default function TrailDetailsPage({user}){
 
     return (
         <>
-          {trailDetails === null ? (
-            <p>null</p>
-          ) : (
             <>
               <h1>{trailDetails.name} Details</h1>
               <p>{trailDetails.description}</p>
@@ -28,14 +26,11 @@ export default function TrailDetailsPage({user}){
               <p>{trailDetails.difficulty}</p>
               <p>{trailDetails._id}</p>
     
-              {source === 'nearby' && (
-                // Display content specific to the nearby trails page
                 <p>This is from the nearby trails page</p>
-              )}
     
               <ReviewForm trailId={trailId} user={user} />
             </>
-          )}
+         
         </>
       );
     }

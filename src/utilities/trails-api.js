@@ -7,6 +7,9 @@ const Trail_Url='/api/trails/nearby?latitude=40&longitude=-111'
 export async function addNew(trailData){
     return sendRequest(`${BASE_URL}`, 'POST', trailData)
 }
+export async function addNewAPI(trailData){
+    return sendRequest(`${BASE_URL}/nearby`, 'POST', trailData)
+}
 
 export async function getAll(){
     return sendRequest(`${BASE_URL}`)

@@ -17,21 +17,8 @@ const bikeSchema = new Schema({
   timestamps: true
 });
 
-const trailSchema = new Schema({
-  name: String,
-  description: String,
-  latitude: Number,
-  longitude: Number,
-  location: String,
-}, {
-  timestamps: true,
-});
 
-const apiTrail = mongoose.model('apiTrail', trailSchema);
 const Trail = mongoose.model('BikingTrail', bikeSchema);
 
 // Export both models as properties of an object
-module.exports = {
-  apiTrail,
-  Trail,
-};
+module.exports = Trail
