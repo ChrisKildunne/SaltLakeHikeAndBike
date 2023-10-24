@@ -15,6 +15,8 @@ export default function App() {
 
   return (
     <main className="App">
+      <div className='BackgroundImage'>
+
     { user ?
     <>
       <NavBar user={ user } setUser={ setUser }/>
@@ -28,7 +30,8 @@ export default function App() {
       </>
     :
     <AuthPage setUser={ setUser }  />
-    }
+  }
+      </div>
     </main>
   );
 }

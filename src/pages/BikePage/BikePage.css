@@ -1,0 +1,25 @@
+/* Custom CSS for card styling */
+.card {
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s; 
+    max-width: 70%;
+    }
+  
+  .card:hover {
+    transform: scale(1.05); 
+  
+  }
+
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .trail-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    padding: 30px;
+  }

@@ -31,12 +31,13 @@ async function addAPITrail(req,res){
 
 async function index(req, res){
     const trails = await Trail.find({}).sort('name').exec();
-    console.log(req)
+    console.log(trails)
     res.json(trails)
 }
 
 async function show(req,res){
     const trail = await Trail.findById(req.params.id);
+    console.log(trail)
     res.json(trail)
 }
 
